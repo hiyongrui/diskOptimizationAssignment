@@ -30,35 +30,6 @@ public class DiskScan {
         generateScan(); // call scanning method of disk
     }
 
-    public void printSequence(String name, ArrayList<Integer> location) {
-        String sequence = "";
-        String working1 = "";
-        String working2 = "";
-        int total = 0;
-        sequence += dp.getCurrent();
-        int previous = dp.getCurrent();
-        System.out.println("name --> " + name);
-        for (int i=0; i < location.size(); i++) {
-
-            int current = location.get(i);
-            sequence += "," + current;
-            int d = Math.abs(previous-current);
-
-            working1 += "|" + previous + "-" + current + "|+";
-            working2 += d + " + ";
-            total += d;
-            previous = current;
-        }
-
-        System.out.println(name + '\n' + "====");
-        System.out.println("Order of Access: " + sequence);
-
-        System.out.println("Total Distance = " + working1.substring(0,working1.length()-1));
-        System.out.println("                 = " + working2.substring(0,working2.length()-2));
-        System.out.println("                 = " + total + '\n');
-
-    }
-
     private void generateScan() {
         //sorted properly disks by SCAN method
         ArrayList<Integer> location = arrangeBySCAN(dp.getCylinders(),dp.getPrevious(), dp.getCurrent(), dp.getSequence());
@@ -132,4 +103,33 @@ public class DiskScan {
         //End result (2) Scan going to 0 = [130, 86, 0, 948, 1022, 1470, 1509, 1750, 1774, 913]
         return emptyRight; //return sorted array scan
     } //end of arrangeByScan()
+
+    public void printSequence(String name, ArrayList<Integer> location) {
+        String sequence = "";
+        String working1 = "";
+        String working2 = "";
+        int total = 0;
+        sequence += dp.getCurrent();
+        int previous = dp.getCurrent();
+        System.out.println("name --> " + name);
+        for (int i=0; i < location.size(); i++) {
+
+            int current = location.get(i);
+            sequence += "," + current;
+            int d = Math.abs(previous-current);
+
+            working1 += "|" + previous + "-" + current + "|+";
+            working2 += d + " + ";
+            total += d;
+            previous = current;
+        }
+
+        System.out.println(name + '\n' + "====");
+        System.out.println("Order of Access: " + sequence);
+
+        System.out.println("Total Distance = " + working1.substring(0,working1.length()-1));
+        System.out.println("                 = " + working2.substring(0,working2.length()-2));
+        System.out.println("                 = " + total + '\n');
+
+    }
 }
