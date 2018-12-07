@@ -5,16 +5,16 @@ import java.io.FileReader;
 import java.util.*;
 
 
-public class DiskFCFSAndSCAN {
+public class DiskFCFSAndSSTF {
 
     Properties p = new Properties();
     DiskParameter dp = null;
 
     public static void main(String args[]) {
-        new DiskFCFSAndSCAN("diskNumbers.properties");
+        new DiskFCFSAndSSTF("diskNumbers.properties");
     }
 
-    public DiskFCFSAndSCAN(String filename) {
+    public DiskFCFSAndSSTF(String filename) {
         try {
             p.load(new BufferedReader(new FileReader(filename)));
             dp = new DiskParameter(p);
@@ -112,5 +112,5 @@ public class DiskFCFSAndSCAN {
         //finally sstf sorted = [86, 1470, 913, 1774, 948, 1509, 1022, 1750, 130]
         return sstf;
     } //end of arrangeBySSTF()
-    
+
 }
