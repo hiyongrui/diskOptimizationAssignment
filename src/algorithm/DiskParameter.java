@@ -2,13 +2,13 @@ package algorithm;
 
 import java.util.Properties;
 
-public class DiskScanParameter {
+public class DiskParameter {
     int previous;
     int current;
     int sequence[];
     int cylinders;
 
-    public DiskScanParameter(Properties p) {
+    public DiskParameter(Properties p) {
         this.cylinders = Integer.parseInt(p.getProperty("Cylinders"));
         this.current = Integer.parseInt(p.getProperty("Position.Current"));
         this.previous = Integer.parseInt(p.getProperty("Position.Previous"));

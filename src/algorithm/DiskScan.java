@@ -9,16 +9,16 @@ import java.util.Properties;
 
 public class DiskScan {
     Properties p = new Properties();
-    DiskScanParameter dp = null;
+    DiskParameter dp = null;
 
     public static void main(String args[]) {
-        new DiskScan("diskScan.properties");
+        new DiskScan("diskNumbers.properties");
     }
 
     public DiskScan(String filename) {
         try {
             p.load(new BufferedReader(new FileReader(filename)));
-            dp = new DiskScanParameter(p);
+            dp = new DiskParameter(p);
         }
         catch (Exception e) {
             e.printStackTrace();
