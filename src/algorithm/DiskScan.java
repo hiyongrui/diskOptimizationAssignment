@@ -23,12 +23,9 @@ public class DiskScan {
         catch (Exception e) {
             e.printStackTrace();
         }
-        generateAnalysis();
+        generateScan();// call scanning method of disk
     }
 
-    public void generateAnalysis() {
-        generateScan(); // call scanning method of disk
-    }
 
     private void generateScan() {
         //sorted properly disks by SCAN method
