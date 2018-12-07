@@ -5,16 +5,16 @@ import java.io.FileReader;
 import java.util.*;
 
 
-public class DiskFCFS {
+public class DiskFCFSAndSCAN {
 
     Properties p = new Properties();
     DiskParameter dp = null;
 
     public static void main(String args[]) {
-        new DiskFCFS("diskNumbers.properties");
+        new DiskFCFSAndSCAN("diskNumbers.properties");
     }
 
-    public DiskFCFS(String filename) {
+    public DiskFCFSAndSCAN(String filename) {
         try {
             p.load(new BufferedReader(new FileReader(filename)));
             dp = new DiskParameter(p);
@@ -69,10 +69,10 @@ public class DiskFCFS {
         printSequence("SSTF", location);
     }
 
-    //Sequence= 86,1470,913,1774,948,1509,1022,1750,130
+    //Original Sequence= 86,1470,913,1774,948,1509,1022,1750,130
     private int[] arrangeBySSTF(int current, int sequence[]) {
-        // current is 143, previous 125, so increasing 143, 913, 948, 1022, 1470, 1509, 1750, 1774, 5000, 130, 86
-        System.out.println("inside arrange by sstf ");
+        // current is 143, so nearest 130, 86, 913, 948, 1022, 1470, 1509, 1750, 1774
+        System.out.println("inside arrange by sstf");
         int n = sequence.length;
         int sstf[] = new int[n];
         for (int i = 0; i < n; i++) {
@@ -109,7 +109,8 @@ public class DiskFCFS {
         } //end of first for loop
 
         // Sequence= 86,1470,9139,1774,948,1509,1022,1750,130
-        //finally sstf sorted = [130, 86, 948, 1022, 1470, 1509, 1750, 1774, 9139]
+        //finally sstf sorted = [86, 1470, 913, 1774, 948, 1509, 1022, 1750, 130]
         return sstf;
     } //end of arrangeBySSTF()
+    
 }
