@@ -113,10 +113,13 @@ public class DiskFCFSAndSSTF {
         //finally sstf sorted = [86, 1470, 913, 1774, 948, 1509, 1022, 1750, 130]
         return sstf;
     } //end of arrangeBySSTF()
+
+
     public void generateLOOK(){
         int location[]=arrangeByLOOK(dp.getCurrent(),dp.getSequence());
         printSequence("LOOK",location);
     }
+
     private int[]arrangeByLOOK(int current,int[] sequence){
         //find legnth of sequence
         int n=sequence.length;
@@ -165,4 +168,5 @@ public class DiskFCFSAndSSTF {
         }
         return look;
     }
+
 }
