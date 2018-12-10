@@ -27,6 +27,7 @@ public class DiskFCFSAndSSTF {
     public void generateAnalysis() {
         generateFCFS();
         generateSSTF();
+        generateLOOK();
     }
 
     public void printSequence(String name, int location[]) {
@@ -95,7 +96,7 @@ public class DiskFCFSAndSSTF {
                     System.out.println("minimum after changed from distance -- " + minimum);
                 }
             } //end of 2nd for loop
-
+            
             int tmp = sstf[i]; // sequential order from the unsorted array 86,1470,9139,1774,948,1509,1022,1750,130
             System.out.println("\n tmp = sstf[i] i value = " + i + " = " + tmp); // 86
             sstf[i] = sstf[ii]; //sorted number found,
@@ -112,5 +113,47 @@ public class DiskFCFSAndSSTF {
         //finally sstf sorted = [86, 1470, 913, 1774, 948, 1509, 1022, 1750, 130]
         return sstf;
     } //end of arrangeBySSTF()
+    public void generateLOOK(){
+        int location[]=arrangeByLOOK(dp.getCurrent(),dp.getSequence());
+        printSequence("LOOK",location);
+    }
+    private int[]arrangeByLOOK(int current,int[] sequence){
+        //find legnth of sequence
+        int n=sequence.length;
+        int look[]=new int[n];
+        List<Integer> temp=new ArrayList<>();
+        for (int i:sequence){
+            temp.add(i);
+        }
 
+        List<Integer> less=new ArrayList<>();
+        List<Integer> more=new ArrayList<>();
+        if (dp.getCurrent()>dp.getPrevious()){
+            Collections.sort(temp);
+            for (int i=0;i<n;i++){
+                if (temp.get(i)>dp.getCurrent()){
+                    less.add(temp.get(i));
+
+                }else{
+                    more.add(temp.get(i));
+                }
+            }
+            Collections.reverse(more);
+        }else{
+            Collections.sort(temp);
+            for (int i=0;i<n;i++){
+                if (temp.get(i)<dp.getCurrent()){
+                    less.add(temp.get(i));
+                }else{
+                    more.add(temp.get(i));
+                }
+            }
+            Collections.reverse(less);
+        }
+        less.addAll(more);
+        for (int i=0; i<less.size();i++){
+            look[i]=less.get(i);
+        }
+        return look;
+    }
 }
