@@ -121,35 +121,44 @@ public class DiskFCFSAndSSTF {
         //find legnth of sequence
         int n=sequence.length;
         int look[]=new int[n];
+        //put diskq1properties into temp array
         List<Integer> temp=new ArrayList<>();
         for (int i:sequence){
             temp.add(i);
         }
-
+        //create 2 arraylists less and more.Less indicates values less than current
+        //And more indicates values more than current
         List<Integer> less=new ArrayList<>();
         List<Integer> more=new ArrayList<>();
+        //if current more than previous sort the temp array
         if (dp.getCurrent()>dp.getPrevious()){
             Collections.sort(temp);
             for (int i=0;i<n;i++){
+                //if item in temp more than current add it into arraylist 'less'
                 if (temp.get(i)>dp.getCurrent()){
                     less.add(temp.get(i));
-
+                //else put into arraylist 'more'
                 }else{
                     more.add(temp.get(i));
                 }
             }
+            //reverse items in more arraylist
             Collections.reverse(more);
         }else{
             Collections.sort(temp);
             for (int i=0;i<n;i++){
+                //if item in temp less than current add that item into less
                 if (temp.get(i)<dp.getCurrent()){
                     less.add(temp.get(i));
+                    //else put in more
                 }else{
                     more.add(temp.get(i));
                 }
             }
+            //reverse items in less arraylist
             Collections.reverse(less);
         }
+        //all items in less put into more
         less.addAll(more);
         for (int i=0; i<less.size();i++){
             look[i]=less.get(i);
