@@ -12,7 +12,7 @@ public class DiskCSCAN {
     DiskParameter dp = null;
 
     public static void main(String args[]) {
-        new DiskCSCAN("diskNumbers.properties");
+        new DiskCSCAN("diskq1.properties");
     }
 
     public DiskCSCAN(String filename) {
@@ -25,13 +25,13 @@ public class DiskCSCAN {
         {
             e.printStackTrace();
         }
-        generateAnalysis();
+        generateAnalysisCScan();
     }
-    public void generateAnalysis()
+    public void generateAnalysisCScan()
     {
         generatecScan();
     }
-    public void printSequence(String name, int location[])
+    public void printSequenceCScan(String name, int location[])
     {
         String sequence = "";
         String working1 = "";
@@ -57,7 +57,7 @@ public class DiskCSCAN {
     }
     public void generatecScan() {
         int location[] = arrangeByCScan(dp.getCurrent(), dp.getSequence());
-        printSequence("C-Scan" , location);
+        printSequenceCScan("C-Scan" , location);
     }
     private int[] arrangeByCScan(int current, int sequence[])
     {
@@ -77,7 +77,8 @@ public class DiskCSCAN {
                 cscanLower.add((cscan[i])); // add numbers lower than current number to array
             }
         }
-        int[] newcscan = new int[n+2]; //
+        
+        
         if (current < previous) { // determine if distance is descending
             System.out.println("Beforesort Lower = " +cscanLower);
             System.out.println("Beforesort Higher = " +cscanHigher);
@@ -89,9 +90,11 @@ public class DiskCSCAN {
             System.out.println("Higher = " +cscanHigher);
             cscanLower.addAll(cscanHigher); // append the array list containing higher numbers to array list containing lower numbers
             System.out.println("AfterAdd" +cscanHigher);
+            int[] newcscan = new int[cscanLower.size()];
             for (int i = 0; i < newcscan.length; i++) {
                 newcscan[i] = cscanLower.get(i).intValue(); // append array list to new array
             }
+            return newcscan;
         }
         else { // determine if distance is ascending
             Collections.sort(cscanHigher); // sort array list in ascending order
@@ -99,15 +102,16 @@ public class DiskCSCAN {
             Collections.sort(cscanLower); // sort array list in ascending order
             cscanLower.add(0, 0);
             cscanHigher.addAll(cscanLower); // append the array list containing lower numbers to array list containing higher numbers
+            
+            int[] newcscan = new int[cscanLower.size()];
 
-            for (int i = 0; i < newcscan.length; i++) {
-                newcscan[i] = cscanHigher.get(i).intValue(); // append array list to new array
-            }
-
-        }
-
-
-        return newcscan; // return
+	        for (int i = 0; i < newcscan.length; i++) {
+	             newcscan[i] = cscanHigher.get(i).intValue(); // append array list to new array
+	         }
+	        return newcscan;
+	
+	        }
+         // return
 
     }
 
