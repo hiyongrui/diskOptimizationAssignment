@@ -138,7 +138,7 @@ public class DiskFCFSAndSSTF {
             Collections.sort(temp);
             for (int i=0;i<n;i++){
                 //if item in temp more than current add it into arraylist 'less'
-                if (temp.get(i)>dp.getCurrent()){
+                if (temp.get(i)>=dp.getCurrent()){
                     less.add(temp.get(i));
                 //else put into arraylist 'more'
                 }else{
