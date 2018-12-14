@@ -48,7 +48,7 @@ public class DiskScan {
         for (int i=0; i< sequence.length; i++) {
             // if distance is > 0, increasing to 4999
             if ( (current - previous) > 0) {
-                if ( (current - sequence[i]) < 0) { //143 - 1470 < 0, current = 143, second number is 1470
+                if ( (current - sequence[i]) <= 0) { //143 - 1470 < 0, current = 143, second number is 1470
                     System.out.println("distance > 0 value = " + sequence[i]);
                     emptyRight.add(sequence[i]);
                     Collections.sort(emptyRight); //sort emptyRight array in ascending order
@@ -64,7 +64,7 @@ public class DiskScan {
             // else if distance is < 0, decreasing to 0
             else {
                 //current = 125, previous = 143, going down to 0
-                if ( (current - sequence[i]) > 0) {
+                if ( (current - sequence[i]) >= 0) {
                     System.out.println("more than 0 value = " + sequence[i]);
                     emptyRight.add(sequence[i]);
                     Collections.sort(emptyRight); //sort emptyRight array in ascending order

@@ -5,16 +5,16 @@ import java.io.FileReader;
 import java.util.*;
 
 
-public class DiskFCFSAndSSTF {
+public class DiskOptimization {
 
     Properties p = new Properties();
     DiskParameter dp = null;
 
     public static void main(String args[]) {
-        new DiskFCFSAndSSTF("diskNumbers.properties");
+        new DiskOptimization("diskNumbers.properties");
     }
 
-    public DiskFCFSAndSSTF(String filename) {
+    public DiskOptimization(String filename) {
         try {
             p.load(new BufferedReader(new FileReader(filename)));
             dp = new DiskParameter(p);
@@ -126,6 +126,7 @@ public class DiskFCFSAndSSTF {
         int look[]=new int[n];
         //put diskq1properties into temp array
         List<Integer> temp=new ArrayList<>();
+
         for (int i:sequence){
             temp.add(i);
         }
@@ -151,7 +152,7 @@ public class DiskFCFSAndSSTF {
             Collections.sort(temp);
             for (int i=0;i<n;i++){
                 //if item in temp less than current add that item into less
-                if (temp.get(i)<dp.getCurrent()){
+                if (temp.get(i)<=dp.getCurrent()){
                     less.add(temp.get(i));
                     //else put in more
                 }else{
@@ -162,7 +163,10 @@ public class DiskFCFSAndSSTF {
             Collections.reverse(less);
         }
         //all items in less put into more
+        System.out.println("less = " + less);
+        System.out.println("MORE = " + more);
         less.addAll(more);
+        System.out.println("COMBINED = " + less);
         for (int i=0; i<less.size();i++){
             look[i]=less.get(i);
         }

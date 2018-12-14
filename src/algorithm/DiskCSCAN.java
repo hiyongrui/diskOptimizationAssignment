@@ -2,17 +2,14 @@ package algorithm;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class DiskCSCAN {
     Properties p = new Properties();
     DiskParameter dp = null;
 
     public static void main(String args[]) {
-        new DiskCSCAN("diskq1.properties");
+        new DiskCSCAN("diskNumbers.properties");
     }
 
     public DiskCSCAN(String filename) {
@@ -70,21 +67,21 @@ public class DiskCSCAN {
         List<Integer> cscanHigher = new ArrayList<Integer>(); // create array to contain numbers greater than current number
         List<Integer> cscanLower = new ArrayList<Integer>(); // create array to contain numbers lower than current number
         for (int i = 0; i < cscan.length; i++) {
-            if (cscan[i] > current) {
+            if (cscan[i] >= current) {
                 cscanHigher.add(cscan[i]); // add numbers greater than current number to array
             }
             if (cscan[i] < current) {
                 cscanLower.add((cscan[i])); // add numbers lower than current number to array
             }
         }
+
         
-        
-        if (current < previous) { // determine if distance is descending
+        if (current < previous) { // determine if distance is descending  //40, 10, 10,0,0,4999,1999,1500,80,45
             System.out.println("Beforesort Lower = " +cscanLower);
             System.out.println("Beforesort Higher = " +cscanHigher);
-            Collections.sort(cscanHigher, Collections.reverseOrder()); // sort array list in descending order
+            cscanHigher.sort(Collections.reverseOrder()); // sort array list in descending order
             cscanHigher.add(0, 4999);
-            Collections.sort(cscanLower, Collections.reverseOrder()); // sort array list in descending order
+            cscanLower.sort(Collections.reverseOrder()); // sort array list in descending order
             cscanLower.add(0);
             System.out.println("Lower = " +cscanLower);
             System.out.println("Higher = " +cscanHigher);
@@ -92,22 +89,28 @@ public class DiskCSCAN {
             System.out.println("AfterAdd" +cscanHigher);
             int[] newcscan = new int[cscanLower.size()];
             for (int i = 0; i < newcscan.length; i++) {
-                newcscan[i] = cscanLower.get(i).intValue(); // append array list to new array
+                newcscan[i] = cscanLower.get(i); // append array list to new array
             }
             return newcscan;
         }
-        else { // determine if distance is ascending
+        else { // determine if distance is ascending  //45,45,80,1500,1999,1999,0,0,10,10
+            System.out.println("cscan lower before " + cscanLower);
+            System.out.println("cscan higher before = " + cscanHigher);
             Collections.sort(cscanHigher); // sort array list in ascending order
+            System.out.println("after sort cscan higher == " + cscanHigher);
             cscanHigher.add(dp.getCylinders() - 1);
+            System.out.println("after adding total cylincer - 1 " + cscanHigher);
             Collections.sort(cscanLower); // sort array list in ascending order
             cscanLower.add(0, 0);
+            System.out.println("after sorted and add 0 to index 0 " + cscanLower);
             cscanHigher.addAll(cscanLower); // append the array list containing lower numbers to array list containing higher numbers
-            
-            int[] newcscan = new int[cscanLower.size()];
-
+            System.out.println("cscan add all done " + cscanHigher);
+            int[] newcscan = new int[cscanHigher.size()];
+            System.out.println("new cscan befroe" + newcscan.length);
 	        for (int i = 0; i < newcscan.length; i++) {
-	             newcscan[i] = cscanHigher.get(i).intValue(); // append array list to new array
+	             newcscan[i] = cscanHigher.get(i); // append array list to new array
 	         }
+	         System.out.println("RETURNING NEW CSCAN   " + Arrays.toString(newcscan));
 	        return newcscan;
 	
 	        }
